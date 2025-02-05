@@ -77,3 +77,28 @@ console.log(
     ])
   )
 );
+
+// 第二種寫法直接用迴圈
+var uniquePathsWithObstacles2 = function (obstacleGrid) {
+  let rows = obstacleGrid.length;
+  let columns = obstacleGrid[0].length;
+  let memo = Array(rows)
+    .fill(null)
+    .map(() => Array(obstacleGrid[0].length).fill(undefined));
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < columns; j++) {
+      if (obstacleGrid[i][j] === 1) {
+        memo[i][j] = 0;
+      } else if (i === 0 && j === 0) {
+        memo[i][j] = 1;
+      } else if (i === 0) {
+        memo[i][j] = memo[i][j - 1];
+      } else if (j === 0) {
+        memo[i][j] = memo[i - 1][j];
+      } else {
+        memo[i][j] = memo[i - 1][j] + memo[i][j - 1];
+      }
+    }
+  }
+  return memo[rows - 1][columns - 1];
+};
