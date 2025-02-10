@@ -4,40 +4,33 @@
 // 返回 k。
 
 // two pointer
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
 var removeDuplicates = function (nums) {
-  let left = 0;
-  let right = 1;
-  let arr_length = nums.length;
-  while (right < arr_length) {
-    if (nums[left] != nums[right]) {
-      left++;
-      right++;
+  // 先預設i為0, j為1
+  let i = 0;
+  let j = 1;
+  // 如果j小於nums.legnth就繼續迴圈
+  while (j < nums.length) {
+    // 如果nums[i]===nums[j]的話代表這兩個還是重複的，那j就繼續往後
+    if (nums[i] === nums[j]) {
+      console.log(`nums[${i}]:${nums[i]} === num[${j}]:${nums[j]}`);
+      j++;
     } else {
-      //   console.log(nums[right]);
-      nums.splice(right, 1);
-      //   console.log(nums);
-      arr_length--;
+      // 如果nums[i]!==nums[j]的話，i就+1，然後把nums[i]與nums[j]互換，再將j往後移動繼續比較
+      console.log(`nums[${i}]:${nums[i]} !== num[${j}]:${nums[j]}`);
+      i = i + 1;
+      [nums[i], nums[j]] = [nums[j], nums[i]];
+      j++;
+      console.log(`nums:[${nums}]`);
     }
   }
-  return { ans: nums.length, nums };
+  return i + 1;
 };
+
+removeDuplicates((nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
 
 console.log(removeDuplicates([1, 1, 2]));
 console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
-[0, 1, 1, 1, 1, 2, 2, 3, 3, 4];
-
-console.log("=================");
-
-var removeDuplicatesNot = function (nums) {
-  let j = i + 1;
-  let remove_count = 0;
-  while (i < nums.length) {
-    if (nums[i] === nums[i - 1]) {
-      remove_count++;
-      while (nums[j] === nums[i] || j < nums.length) {
-        remove_count++;
-        j++;
-      }
-    }
-  }
-};

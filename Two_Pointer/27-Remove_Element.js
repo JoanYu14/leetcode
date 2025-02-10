@@ -41,3 +41,29 @@ console.log(removeElement([], 2));
 // const arr = [1, 2, 3, 4];
 // arr[2] = arr[1];
 // console.log(arr);
+
+// 方法2:
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function (nums, val) {
+  if (nums.length === 1 && nums[0] === val) {
+    return 0;
+  }
+  let i = 0;
+  let j = nums.length - 1;
+  while (j > i) {
+    if (nums[i] === val) {
+      [nums[i], nums[j]] = [nums[j], nums[i]];
+      j--;
+    } else {
+      i++;
+    }
+  }
+  if (nums[i] === val) {
+    i--;
+  }
+  return i + 1;
+};
